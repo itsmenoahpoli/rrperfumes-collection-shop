@@ -12,20 +12,20 @@ $requestFnName = $request->fnName;
 
 switch ($requestFnName)
 {
-  case 'product-create':
-    return $productsController->productCreate($request);
-
   case 'products-getAll':
-    return $productsController->productsGetAll($request);
+    return $productsController->getAll($request);
+
+  case 'product-create':
+    return $productsController->create($request);
 
   case 'products-getById':
-    return $productsController->productsGetById($request);
+    return $productsController->getById($request);
 
-  case 'products-update':
-    return $productsController->productsUpdate($request);
+  case 'products-updateById':
+    return $productsController->updateById($request);
 
-  case 'products-delete':
-    return $productsController->productsDelete($request);
+  case 'products-deleteById':
+    return $productsController->deleteById($request);
 
   default:
     return 'Invalid Request';

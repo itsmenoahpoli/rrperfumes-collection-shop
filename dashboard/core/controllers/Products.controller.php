@@ -5,6 +5,7 @@ require __DIR__.'./../response/Http.response.php';
 class ProductsController extends DatabaseConnectionService
 {
   protected $dbConn;
+  protected $dbTable = 'products';
   public $httpResponse;
 
   public function __construct()
@@ -24,11 +25,11 @@ class ProductsController extends DatabaseConnectionService
     return strtoupper('SKU-'.$randomString);
   }
 
-  public function productsGetAll()
+  public function getAll($request)
   {
     try 
     {
-      $productsGetAllQry = "SELECT * FROM `products` ORDER BY created_at DESC";
+      $productsGetAllQry = "SELECT * FROM `{$this->dbTable}` WHERE name LIKE '%{$request->q}' OR description LIKE '%{$request->q}%' ORDER BY created_at DESC";
       $productsGetAllQryResult = $this->dbConn->query($productsGetAllQry);
 
       if ($productsGetAllQryResult->num_rows > 0)
@@ -40,17 +41,22 @@ class ProductsController extends DatabaseConnectionService
 
         return $this->httpResponse->send($productsArr);
       }
+
+      // if (!$productsGetAllQryResult->num_rows > 0)
+      // {
+      //   return $this->httpResponse->send([], 404);
+      // }
     } catch (Exception $e)
     {
       return $this->httpResponse->send($e->getMessage(), 500);
     }
   }
 
-  public function productGetById($product)
+  public function getById($request)
   {
     try
     {
-      $productGetByIdQry = "SELECT * FROM `products` WHERE id = {$product->id}";
+      $productGetByIdQry = "SELECT * FROM `{$this->dbTable}` WHERE id = {$request->id}";
       $productGetByIdQryResult = $this->dbConn->query($productGetByIdQry);
 
       if ($productGetByIdQryResult->num_rows > 0)
@@ -66,15 +72,15 @@ class ProductsController extends DatabaseConnectionService
     }
   }
 
-  public function productCreate($product)
+  public function create($request)
   {
     try 
     {
       $productSKU = $this->generateSKU();
 
       $productCreateQry = "
-        INSERT INTO `products` (sku, category, name, description, price, quantity)
-        VALUES ('{$productSKU}', '{$product->category}', '{$product->name}', '{$product->description}', '{$product->price}', '{$product->quantity}')
+        INSERT INTO `{$this->dbTable}` (sku, category, name, description, price, quantity)
+        VALUES ('{$productSKU}', '{$request->category}', '{$request->name}', '{$request->description}', '{$request->price}', '{$request->quantity}')
       ";
 
       if (mysqli_query($this->dbConn, $productCreateQry)) {
@@ -88,18 +94,18 @@ class ProductsController extends DatabaseConnectionService
     }
   }
 
-  public function productUpdate($product)
+  public function updateById($request)
   {
     try
     {
       $productUpdateQry = "
-      UPDATE `products` 
-      SET category = '{$product->category}',  name = '{$product->name}', description = '{$product->description}', quantity = '{$product->quantity}', price = '{$product->price}', 
-      WHERE id = {$product->id}
+      UPDATE `{$this->dbTable}` 
+      SET category = '{$request->category}',  name = '{$request->name}', description = '{$request->description}', quantity = '{$request->quantity}', price = '{$request->price}' 
+      WHERE id = {$request->id}
     ";
 
     if (mysqli_query($this->dbConn, $productUpdateQry)) {
-      return $this->httpResponse->send('Product uploaded', 201);
+      return $this->httpResponse->send('Product updated', 200);
     }
 
     return $this->httpResponse->send(mysqli_error($this->dbConn));
@@ -109,11 +115,11 @@ class ProductsController extends DatabaseConnectionService
     }
   }
 
-  public function productDelete($product)
+  public function deleteById($request)
   {
     try
     {
-      $productDeleteByIdQry = "DELETE FROM `products` WHERE id = {$product->id}";
+      $productDeleteByIdQry = "DELETE FROM `{$this->dbTable}` WHERE id = {$request->id}";
       $productDeleteByIdQryResult = $this->dbConn->query($productDeleteByIdQry);
 
       if ($dbConn->query($productDeleteByIdQry))
