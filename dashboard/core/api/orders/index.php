@@ -12,19 +12,19 @@ $requestFnName = $request->fnName;
 
 switch ($requestFnName)
 {
-  case 'products-getAll':
+  case 'orders-getAll':
     return $ordersController->getAll($request);
 
   case 'product-create':
     return $ordersController->create($request);
 
-  case 'products-getById':
+  case 'orders-getById':
     return $ordersController->getById($request);
 
-  case 'products-updateById':
+  case 'orders-updateById':
     return $ordersController->updateById($request);
 
-  case 'products-deleteById':
+  case 'orders-deleteById':
     return $ordersController->deleteById($request);
 
   default:

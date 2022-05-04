@@ -29,7 +29,8 @@ class OrdersController extends DatabaseConnectionService
   {
     try 
     {
-      $GetAllQry = "SELECT * FROM `{$this->dbTable}` WHERE name LIKE '%{$request->q}' OR description LIKE '%{$request->q}%' ORDER BY created_at DESC";
+      // WHERE name LIKE '%{$request->q}' OR description LIKE '%{$request->q}%'
+      $GetAllQry = "SELECT * FROM `{$this->dbTable}`  ORDER BY created_at DESC";
       $GetAllQryResult = $this->dbConn->query($GetAllQry);
 
       if ($GetAllQryResult->num_rows > 0)

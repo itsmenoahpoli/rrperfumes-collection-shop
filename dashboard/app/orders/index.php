@@ -57,13 +57,14 @@
                 <th>
                   <input type="checkbox">
                 </th>
-                <th>SKU</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Quantity</th>
-                <th>Price</th>
+                <th>Order #</th>
+                <th>Customer Name</th>
+                <th>Customer E-mail</th>
+                <th>Customer Contacts</th>
+                <th>Delivery Notes</th>
+                <th>Total Amount</th>
                 <th>Status</th>
-                <th>Date Uploaded</th>
+                <th>Checkout Date</th>
                 <th>Last Updated</th>
                 <th></th>
               </tr>
@@ -110,37 +111,29 @@
         response.data.map(row => {
           const price = row.price;
 
-          // let tableRow = `
-          //   <tr>
-          //     <td>
-          //       <input type="checkbox">
-          //     </td>
-          //     <td class="img-td">
-          //       <img src="./../../assets/images/perfume-img.jpg" alt="perfume-img">
-          //       <span>
-          //         ${row.sku || '-'}
-          //       </span>
-          //     </td>
-          //     <td>${row.name}</td>
-          //     <td>${row.category}</td>
-          //     <td>${row.quantity}</td>
-          //     <td><span class="badge badge-success">In Stocks</span></td>
-          //     <td>₱ ${Number(price).toFixed(2)}</td>
-          //     <td>${formatDate(row.created_at)}</td>
-          //     <td>${formatDate(row.updated_at)}</td>
-          //     <td>
-          //       <button class="btn-edit" title="Update Information" onclick="handleRowEdit(${row.id})">
-          //         <i class="fa-solid fa-pen-to-square"></i>
-          //       </button>
+          let tableRow = `
+            <tr>
+              <td>
+                <input type="checkbox">
+              </td>
+              <td>${row.reference_code}</td>
+              <td>${row.customer_name}</td>
+              <td>${row.customer_email}</td>
+              <td>${row.customer_contacts}</td>
+              <td>${row.delivery_notes}</td>
+              <td>₱ ${Number(price).toFixed(2)}</td>
+              <td><span class="badge badge-warning">${row.status}</span></td>
+              <td>${formatDate(row.created_at)}</td>
+              <td>${formatDate(row.updated_at)}</td>
+              <td>
+                <button>
+                  View Order
+                </button>
+              </td>
+            </tr>
+          `;
 
-          //       <button class="btn-edit" title="Update Information" onclick="handleRowDelete(${row.id})">
-          //         <i class="fa-solid fa-trash-can"></i>
-          //       </button>
-          //     </td>
-          //   </tr>
-          // `;
-
-          // $('table>tbody').append(tableRow)
+          $('table>tbody').append(tableRow)
         })
       }
 
