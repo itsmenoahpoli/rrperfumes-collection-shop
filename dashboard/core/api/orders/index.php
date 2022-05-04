@@ -20,6 +20,12 @@ switch ($requestFnName)
 
   case 'orders-getById':
     return $ordersController->getById($request);
+  
+  case 'orders-getByRefCode':
+    return $ordersController->getByRefCode($request);
+
+  case 'orders-updateByRefCode':
+    return $ordersController->updateByRefCode($request);
 
   case 'orders-updateById':
     return $ordersController->updateById($request);

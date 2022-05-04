@@ -2,17 +2,7 @@
   <div class="sidebar-links-container">
     <button>
       <i class="fa-solid fa-home"></i>
-      Dashboard
-    </button>
-    
-    <button onclick="redirectTo('/transactions/')">
-      <i class="fa-solid fa-list-check"></i>
-      Transactions
-    </button>
-
-    <button onclick="redirectTo('/invoices/')">
-      <i class="fa-solid fa-rectangle-list"></i>
-      Invoices
+      Dashboard Overview
     </button>
 
     <button onclick="redirectTo('/payments/')">
@@ -23,11 +13,6 @@
     <button onclick="redirectTo('/orders/')">
       <i class="fa-brands fa-opencart"></i>
       Orders
-    </button>
-
-    <button onclick="redirectTo('/order-trackings/')">
-      <i class="fa-solid fa-list-check"></i>
-      Order Trackings
     </button>
 
     <button onclick="redirectTo('/inventory/')">

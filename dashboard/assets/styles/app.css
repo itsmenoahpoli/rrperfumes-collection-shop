@@ -14,6 +14,18 @@ body {
   background-attachment: fixed !important;
 }
 
+.w-25 {
+  width: 25%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -129,9 +141,18 @@ button:disabled {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   gap: 20px;
+}
+
+.d-flex.justify-content-space-around {
+  -ms-flex-pack: distribute !important;
+      justify-content: space-around !important;
+}
+
+.d-flex.justify-content-start {
+  -webkit-box-pack: start !important;
+      -ms-flex-pack: start !important;
+          justify-content: start !important;
 }
 
 form button {
@@ -300,12 +321,12 @@ table tbody tr td .badge-warning {
 }
 
 table tbody tr td.img-td {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
   gap: 15px;
 }
 
@@ -344,6 +365,67 @@ table tbody tr:nth-child(even) {
   background: #fafafc;
 }
 
+table tbody.padded-td tr td {
+  height: 70px !important;
+}
+
+table.table-scrollable {
+  display: block !important;
+  empty-cells: show !important;
+}
+
+table.table-scrollable thead {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  padding-right: 1rem;
+  overflow-y: hidden !important;
+}
+
+table.table-scrollable tbody {
+  /* Position */
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  height: 70vh !important;
+  overflow-y: scroll !important;
+  /* Decoration */
+  border-top: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+table.table-scrollable tr {
+  width: 100% !important;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+table.table-scrollable tr th {
+  -ms-flex-preferred-size: 20% !important;
+      flex-basis: 20% !important;
+  -webkit-box-flex: 2 !important;
+      -ms-flex-positive: 2 !important;
+          flex-grow: 2 !important;
+  padding: 1rem !important;
+  text-align: left !important;
+}
+
+table.table-scrollable tr td {
+  -ms-flex-preferred-size: 100% !important;
+      flex-basis: 100% !important;
+  -webkit-box-flex: 2 !important;
+      -ms-flex-positive: 2 !important;
+          flex-grow: 2 !important;
+  padding: 1rem !important;
+  text-align: left !important;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+}
+
 table.tbody-scrollable thead th {
   position: -webkit-sticky;
   position: sticky;
@@ -361,10 +443,18 @@ table.tbody-scrollable thead th {
 
 .card {
   background: #fff;
-  padding: 10px 20px;
   border-radius: 10px;
   -webkit-box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px !important;
           box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px !important;
+}
+
+.card .card-header {
+  padding: 10px 20px;
+  border-bottom: solid 1px #ccc;
+}
+
+.card .card-body {
+  padding: 10px 20px;
 }
 
 .card .card-body h3 {
@@ -382,7 +472,7 @@ table.tbody-scrollable thead th {
   padding: 20px;
 }
 
-.card.no-padding {
+.card.no-padding .card-body {
   padding: 0;
 }
 
@@ -689,5 +779,39 @@ table.tbody-scrollable thead th {
   color: #000;
   font-size: 13px;
   margin-bottom: 10px;
+}
+
+.order-details-container .w-25 .card,
+.order-details-container .card.w-75 {
+  margin-bottom: 25px;
+}
+
+.order-details-container .w-25 .card .card-body .detail-content,
+.order-details-container .card.w-75 .card-body .detail-content {
+  padding: 25px 0;
+}
+
+.order-details-container .w-25 .card .card-body .detail-content small,
+.order-details-container .card.w-75 .card-body .detail-content small {
+  font-weight: 600;
+}
+
+.order-details-container .w-25 .card .card-body .detail-content .form-group p,
+.order-details-container .card.w-75 .card-body .detail-content .form-group p {
+  color: #666;
+  font-size: 13px;
+}
+
+.order-details-container .w-25 .card .card-body h4.text-center,
+.order-details-container .card.w-75 .card-body h4.text-center {
+  text-align: center;
+}
+
+.order-details-container .w-25 .card .card-body hr,
+.order-details-container .card.w-75 .card-body hr {
+  color: #eee;
+  background: #eee;
+  height: 1px;
+  border: 0;
 }
 /*# sourceMappingURL=app.css.map */

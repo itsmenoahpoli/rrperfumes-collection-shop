@@ -29,8 +29,7 @@ class OrdersController extends DatabaseConnectionService
   {
     try 
     {
-      // WHERE name LIKE '%{$request->q}' OR description LIKE '%{$request->q}%'
-      $GetAllQry = "SELECT * FROM `{$this->dbTable}`  ORDER BY created_at DESC";
+      $GetAllQry = "SELECT * FROM `{$this->dbTable}` WHERE reference_code LIKE '%{$request->q}' OR customer_name LIKE '%{$request->q}%' OR customer_email LIKE '%{$request->q}%' OR customer_contacts LIKE '%{$request->q}%' OR status LIKE '%{$request->q}%'  ORDER BY created_at DESC";
       $GetAllQryResult = $this->dbConn->query($GetAllQry);
 
       if ($GetAllQryResult->num_rows > 0)
@@ -73,6 +72,26 @@ class OrdersController extends DatabaseConnectionService
     }
   }
 
+  public function getByRefCode($request)
+  {
+    try
+    {
+      $GetByRefCodeQry = "SELECT * FROM `{$this->dbTable}` WHERE reference_code = '{$request->reference_code}'";
+      $GetByRefCodeQryResult = $this->dbConn->query($GetByRefCodeQry);
+
+      if ($GetByRefCodeQryResult->num_rows > 0)
+      {
+        while ($orders = $GetByRefCodeQryResult->fetch_assoc())
+        {
+          return $this->httpResponse->send($orders);
+        }
+      }
+    } catch (Exception $e)
+    {
+      return $this->httpResponse->send($e->getMessage(), 500);
+    }
+  }
+
   public function create($request)
   {
     try 
@@ -95,13 +114,36 @@ class OrdersController extends DatabaseConnectionService
     }
   }
 
-  public function updateById($request)
+  public function updateByRefCode($request)
   {
+    var_dump($request);
     try
     {
       $UpdateQry = "
       UPDATE `{$this->dbTable}` 
-      SET  
+      SET  status = '{$request->status}'
+      WHERE reference_code = '{$request->reference_code}'
+    ";
+
+    if (mysqli_query($this->dbConn, $UpdateQry)) {
+      return $this->httpResponse->send(' updated', 200);
+    }
+
+    return $this->httpResponse->send(mysqli_error($this->dbConn));
+    } catch (Exception $e)
+    {
+      return $this->httpResponse->send($e->getMessage(), 500);
+    }
+  }
+
+  public function updateById($request)
+  {
+    var_dump($request);
+    try
+    {
+      $UpdateQry = "
+      UPDATE `{$this->dbTable}` 
+      SET  status = '{$request->status}'
       WHERE id = {$request->id}
     ";
 

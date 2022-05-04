@@ -33,8 +33,6 @@ const httpRequest = async (
   payload = {},
   payloadType = "json-payload"
 ) => {
-  console.log({ payloadType });
-
   axios.defaults.baseURL =
     "http://localhost/projects/rrperfumes-v2/dashboard/core/api";
   axios.defaults.headers.common["Content-Type"] = "application/json";

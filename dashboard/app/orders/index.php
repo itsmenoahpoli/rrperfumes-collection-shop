@@ -32,7 +32,7 @@
 
         <div class="page-header-grid">
           <div class="form-group">
-            <input type="text" oninput="getData(this.value)" placeholder="SEARCH (order number)">
+            <input type="text" oninput="getData(this.value)" placeholder="SEARCH (Ref. number, name, email, contact)">
           </div>
 
           <div class="btn-container">
@@ -57,7 +57,7 @@
                 <th>
                   <input type="checkbox">
                 </th>
-                <th>Order #</th>
+                <th>Reference #</th>
                 <th>Customer Name</th>
                 <th>Customer E-mail</th>
                 <th>Customer Contacts</th>
@@ -70,7 +70,7 @@
               </tr>
             </thead>
 
-            <tbody>
+            <tbody class="padded-td">
               <!--  -->
             </tbody>
           </table>
@@ -121,12 +121,12 @@
               <td>${row.customer_email}</td>
               <td>${row.customer_contacts}</td>
               <td>${row.delivery_notes}</td>
-              <td>₱ ${Number(price).toFixed(2)}</td>
+              <td>₱ ${Number(row.total_amount).toFixed(2)}</td>
               <td><span class="badge badge-warning">${row.status}</span></td>
               <td>${formatDate(row.created_at)}</td>
               <td>${formatDate(row.updated_at)}</td>
               <td>
-                <button>
+                <button onclick="handleRowView('${row.reference_code}')">
                   View Order
                 </button>
               </td>
@@ -146,36 +146,8 @@
     })
   }
 
-  const handleRowEdit = async (id) => {
-    redirectTo(`/inventory/edit.php/?id=${id}`)
-  }
-
-  const handleRowDelete = async (id) => {
-    if (confirm('Are you sure you want to delete this record?'))
-    {
-      await httpRequest(
-        "/orders/",
-        "post",
-        {
-          fnName: 'orders-delete',
-          id: id
-        }
-      ).then(async (response) => {
-        await getData()
-
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Record has been successfully deleted from the database',
-          icon: 'success',
-        })
-      }).catch(err => {
-        Swal.fire({
-          title: 'Failed!',
-          text: 'Record failed to be deleted from the database',
-          icon: 'warning',
-        })
-      })
-    }
+  const handleRowView = (reference_code) => {
+    redirectTo(`/orders/view.php/?reference_code=${reference_code}`)
   }
 
   (async () => {

@@ -32,6 +32,18 @@ $sidebarBackgroundColor: $primary2Color;
 $modalBorderRadius: 10px;
 
 // WIDTHS
+.w-25 {
+  width: 25%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -150,8 +162,15 @@ button:disabled {
 
 .d-flex {
   display: flex;
-  justify-content: space-around;
   gap: 20px;
+}
+
+.d-flex.justify-content-space-around {
+  justify-content: space-around !important;
+}
+
+.d-flex.justify-content-start {
+  justify-content: start !important;
 }
 
 // FORM
@@ -332,8 +351,8 @@ table {
       }
 
       td.img-td {
-        display: flex;
-        align-items: center;
+        display: flex !important;
+        align-items: center !important;
         gap: 15px;
 
         img {
@@ -373,6 +392,59 @@ table {
       background: #fafafc;
     }
   }
+
+  tbody.padded-td {
+    tr {
+      td {
+        height: 70px !important;
+      }
+    }
+  }
+}
+
+table.table-scrollable {
+  display: block !important;
+  empty-cells: show !important;
+
+  thead {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    padding-right: 1rem;
+    overflow-y: hidden !important;
+  }
+
+  tbody {
+    /* Position */
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: 70vh !important;
+    overflow-y: scroll !important;
+    /* Decoration */
+    border-top: 1px solid rgba(0, 0, 0, 0.2) !important;
+  }
+
+  tr {
+    width: 100% !important;
+    display: flex !important;
+  }
+
+  tr th {
+    flex-basis: 20% !important;
+    flex-grow: 2 !important;
+    padding: 1rem !important;
+    text-align: left !important;
+  }
+
+  tr td {
+    flex-basis: 100% !important;
+    flex-grow: 2 !important;
+    padding: 1rem !important;
+    text-align: left !important;
+    display: flex !important;
+    align-items: center !important;
+  }
 }
 
 table.tbody-scrollable {
@@ -397,12 +469,18 @@ table.tbody-scrollable {
 // CARDS
 .card {
   background: #fff;
-  padding: 10px 20px;
   border-radius: 10px;
   box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px,
     rgba(17, 17, 26, 0.05) 0px 8px 32px !important;
 
+  .card-header {
+    padding: 10px 20px;
+    border-bottom: solid 1px #ccc;
+  }
+
   .card-body {
+    padding: 10px 20px;
+
     h3 {
       font-weight: normal;
     }
@@ -421,7 +499,9 @@ table.tbody-scrollable {
 }
 
 .card.no-padding {
-  padding: 0;
+  .card-body {
+    padding: 0;
+  }
 }
 
 .card.no-x-padding {
@@ -693,6 +773,41 @@ table.tbody-scrollable {
             margin-bottom: 10px;
           }
         }
+      }
+    }
+  }
+}
+
+.order-details-container {
+  .w-25 .card,
+  .card.w-75 {
+    margin-bottom: 25px;
+
+    .card-body {
+      .detail-content {
+        padding: 25px 0;
+
+        small {
+          font-weight: 600;
+        }
+
+        .form-group {
+          p {
+            color: #666;
+            font-size: 13px;
+          }
+        }
+      }
+
+      h4.text-center {
+        text-align: center;
+      }
+
+      hr {
+        color: #eee;
+        background: #eee;
+        height: 1px;
+        border: 0;
       }
     }
   }

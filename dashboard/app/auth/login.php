@@ -29,7 +29,7 @@
           <label for="rememberMe">Remember me</label>
         </div>
 
-        <div class="forgot-password-link d-none">
+        <div class="forgot-password-link">
           <small>
             <a href="#" onclick="redirectTo('/auth/forgot-password.php')">Forgot your password?</a>
           </small>
