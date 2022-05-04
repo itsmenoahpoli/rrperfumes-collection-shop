@@ -16,6 +16,16 @@ const formatDate = (str) => {
   return moment(new Date(str)).format("MMM DD, YYYY hh:mm A");
 };
 
+// AUTH CHECKER
+const requiresAuthCheck = () => {
+  if (
+    localStorage.getItem("isUserLoggedIn") === null ||
+    localStorage.getItem("user") === null
+  ) {
+    redirectTo("/auth/login.php");
+  }
+};
+
 // HTTP
 const httpRequest = async (
   apiEndpoint = "/",

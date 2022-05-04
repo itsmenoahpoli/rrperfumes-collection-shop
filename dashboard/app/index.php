@@ -15,7 +15,11 @@
       </div>
     </div>
   </div>
-
 </div>
+
+<script>
+  setPageTitle("Dashboard")
+  requiresAuthCheck()
+</script>
 
 <?php require './../components/layout/foot.layout.php'; ?>

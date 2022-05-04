@@ -103,6 +103,7 @@
 
 <script>
   setPageTitle("Update Inventory")
+  requiresAuthCheck()
 
   const id = Number(new URLSearchParams(window.location.search).get('id'))
 

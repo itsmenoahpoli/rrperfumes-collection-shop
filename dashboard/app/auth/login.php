@@ -59,7 +59,12 @@
           fnName: 'user-login'
         }
       ).then(response => {
-        redirectTo('/')
+        localStorage.setItem('user', JSON.stringify(response.data))
+        localStorage.setItem('isUserLoggedIn', 1)
+
+        setTimeout(() => {
+          redirectTo('/')
+        }, 800)
       }).catch(err => {
         if (err.response.status === 401) {
           Swal.fire({

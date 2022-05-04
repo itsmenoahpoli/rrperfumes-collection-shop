@@ -32,7 +32,7 @@
 
         <div class="page-header-grid">
           <div class="form-group">
-            <input type="text" oninput="getProducts(this.value)" placeholder="SEARCH (sku, name, category, price)">
+            <input type="text" oninput="getData(this.value)" placeholder="SEARCH (sku, name, category, price)">
           </div>
 
           <div class="btn-container">
@@ -81,6 +81,7 @@
 
 <script>
   setPageTitle("Inventory")
+  requiresAuthCheck()
 
   const clearTableData = () => {
     $('table>tbody').empty()
@@ -94,7 +95,7 @@
     </tr>
   `
 
-  const getProducts = async (q = "") => {
+  const getData = async (q = "") => {
     clearTableData()
 
     await httpRequest(
@@ -167,7 +168,7 @@
           id: id
         }
       ).then(async (response) => {
-        await getProducts()
+        await getData()
 
         Swal.fire({
           title: 'Deleted!',
@@ -185,7 +186,7 @@
   }
 
   (async () => {
-    await getProducts();
+    await getData();
   })()
 </script>
 

@@ -100,6 +100,7 @@
 
 <script>
   setPageTitle("New Inventory")
+  requiresAuthCheck()
 
   $(document).ready(() => {
     const handleProductUpload = async () => {
