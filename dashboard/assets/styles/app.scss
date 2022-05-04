@@ -702,6 +702,11 @@ table.tbody-scrollable {
       display: flex;
       justify-content: space-between;
 
+      span#userType {
+        text-transform: capitalize !important;
+        text-decoration: underline;
+      }
+
       button {
         background: #fcfcfc;
         color: #262626;

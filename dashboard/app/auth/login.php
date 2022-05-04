@@ -44,45 +44,43 @@
 <script>
   setPageTitle('Log In')
 
-  $(document).ready(() => {
-    const handleLogin = async () => {
-      let formData = Object.fromEntries(
-        new FormData(document.querySelector('form'))
-        .entries()
-      )
+  redirectIfAuthenticated()
 
-      await httpRequest(
-        "/auth/",
-        "post",
-        {
-          ...formData,
-          fnName: 'user-login'
-        }
-      ).then(response => {
-        localStorage.setItem('user', JSON.stringify(response.data))
-        localStorage.setItem('isUserLoggedIn', 1)
+  const handleLogin = async () => {
+    let formData = Object.fromEntries(
+      new FormData(document.querySelector('form'))
+      .entries()
+    )
 
-        setTimeout(() => {
-          redirectTo('/')
-        }, 800)
-      }).catch(err => {
-        if (err.response.status === 401) {
-          Swal.fire({
-            title: 'Unauthorized!',
-            text: 'Invalid credentials provided!',
-            icon: 'error',
-          })
-        }
-      })
-    }
+    await httpRequest(
+      "/auth/",
+      "post",
+      {
+        ...formData,
+        fnName: 'user-login'
+      }
+    ).then(response => {
+      localStorage.setItem('user', JSON.stringify(response.data))
+      localStorage.setItem('isUserLoggedIn', 1)
 
-    $('form').submit(e => {
-      e.preventDefault();
-      handleLogin();
+      setTimeout(() => {
+        redirectTo('/')
+      }, 800)
+    }).catch(err => {
+      if (err.response.status === 401) {
+        Swal.fire({
+          title: 'Unauthorized!',
+          text: 'Invalid credentials provided!',
+          icon: 'error',
+        })
+      }
     })
-  })
+  }
 
-  
+  $('form').submit(e => {
+    e.preventDefault();
+    handleLogin();
+  })
 </script>
 
 <?php require './../../components/layout/foot.layout.php'; ?>

@@ -26,6 +26,15 @@ const requiresAuthCheck = () => {
   }
 };
 
+const redirectIfAuthenticated = () => {
+  let user = localStorage.getItem("user");
+  let userIsLoggedIn = localStorage.getItem("userIsLoggedIn");
+
+  if (user !== null || userIsLoggedIn === "1") {
+    redirectTo("/");
+  }
+};
+
 // HTTP
 const httpRequest = async (
   apiEndpoint = "/",

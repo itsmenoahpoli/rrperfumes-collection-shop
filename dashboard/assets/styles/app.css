@@ -707,6 +707,11 @@ table.tbody-scrollable thead th {
           justify-content: space-between;
 }
 
+.dashboard-layout-container .dashboard-content-container .navbar span#userType {
+  text-transform: capitalize !important;
+  text-decoration: underline;
+}
+
 .dashboard-layout-container .dashboard-content-container .navbar button {
   background: #fcfcfc;
   color: #262626;
