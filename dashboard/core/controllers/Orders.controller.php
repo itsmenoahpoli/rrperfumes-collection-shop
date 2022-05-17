@@ -1,5 +1,6 @@
 <?php
 require __DIR__.'./../services/DatabaseConnection.service.php';
+require __DIR__.'./../services/Mail.service.php';
 require __DIR__.'./../response/Http.response.php';
 
 class OrdersController extends DatabaseConnectionService
@@ -7,11 +8,13 @@ class OrdersController extends DatabaseConnectionService
   protected $dbConn;
   protected $dbTable = 'orders';
   public $httpResponse;
+  public $mailService;
 
   public function __construct()
   {
     $this->dbConn = $this->createDBConnection();
     $this->httpResponse = new HttpResponse();
+    $this->mailService = new MailService();
   }
 
   public function generateSKU()
@@ -41,11 +44,6 @@ class OrdersController extends DatabaseConnectionService
 
         return $this->httpResponse->send($ordersArr);
       }
-
-      // if (!$GetAllQryResult->num_rows > 0)
-      // {
-      //   return $this->httpResponse->send([], 404);
-      // }
     } catch (Exception $e)
     {
       return $this->httpResponse->send($e->getMessage(), 500);
@@ -116,7 +114,6 @@ class OrdersController extends DatabaseConnectionService
 
   public function updateByRefCode($request)
   {
-    var_dump($request);
     try
     {
       $UpdateQry = "
@@ -126,6 +123,29 @@ class OrdersController extends DatabaseConnectionService
     ";
 
     if (mysqli_query($this->dbConn, $UpdateQry)) {
+      $orderStatusMailTemplate = <<<EOD
+        <html>
+          <body>
+            <h4>Greetings customer,</h4> 
+
+            <p>
+              Order Reference #: {$request->reference_code}
+            </p>
+
+            <p>
+              Were happy to inform you that the status of your order <br />
+              has been updated to ({$request->status})
+            </p>
+          </body>
+        </html>
+      EOD;
+
+      $this->mailService->sendMail([
+        'subject' => 'Order Status Update',
+        'to' => "patrickpolicarpio08@gmail.com",
+        'message' => $orderStatusMailTemplate,
+      ]);
+
       return $this->httpResponse->send(' updated', 200);
     }
 

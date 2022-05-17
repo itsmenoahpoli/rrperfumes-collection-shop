@@ -1,12 +1,6 @@
 <?php
 
-/**
- * DATABASE PROPERTIES
- */
-define('DB_HOST', '127.0.0.1');
-define('DB_USER', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'rrperfume-shop-db');
+
 
 class DatabaseConnectionService
 {
@@ -14,7 +8,15 @@ class DatabaseConnectionService
 
   public function createDBConnection()
   {
-    $this->dbConn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    /**
+     * DATABASE PROPERTIES
+     */
+    $dbHost = '127.0.0.1';
+    $dbUser = 'root';
+    $dbPassword = '';
+    $dbName = 'rrperfume-shop-db';
+
+    $this->dbConn = mysqli_connect($dbHost, $dbUser, $dbPassword, $dbName);
 
     return $this->dbConn;
   }

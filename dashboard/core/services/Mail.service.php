@@ -20,7 +20,7 @@ class MailService
     ];
   }
 
-  public function sendMail()
+  public function sendMail(array $mail)
   {
     try 
     {
@@ -33,17 +33,32 @@ class MailService
       $this->mail->Password = $this->mailtrapConfig->SMTP_PASSWORD;
       
       $this->mail->setFrom('no-reply@rrperfumes.com');
-      $this->mail->addAddress('johndoe@domain.com');
+      $this->mail->addAddress($mail['to']);
 
-      $this->mail->Subject = ('Test e-mail message from RR Perfumes & Collection');
+      $this->mail->Subject = "RR Perfumes & Collections - {$mail['subject']}";
 
       $this->mail->isHTML(true);
-      $this->mail->Body = '<p>This is a test e-mail</p>';
-      $this->mail->AltBody = 'This is a test e-mail';
+      $this->mail->Body = <<<EOD
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Document</title>
+        </head>
+        <body>
+          <p>
+            {$mail['message']}
+          </p>
+        </body>
+        </html>
+      EOD;
 
+      $this->mail->AltBody = $mail['message'];
       $this->mail->send();
 
-      return 'E-mail sent successfully';
+      return "E-mail notification successfully sent to {$mail['to']}";
     } catch (Exception $e) 
     {
       throw $e->getMessage();
