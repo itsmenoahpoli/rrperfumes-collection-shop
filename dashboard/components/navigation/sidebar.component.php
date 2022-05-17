@@ -25,9 +25,9 @@
       Inventory Monitoring
     </button>
     
-    <button>
+    <button onclick="redirectTo('/users/customers/')">
       <i class="fa-solid fa-users"></i>
-      App Users
+      Customers
     </button>
   </div>
 </div>

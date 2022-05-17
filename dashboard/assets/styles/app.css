@@ -60,6 +60,13 @@ button:disabled {
   pointer-events: all !important;
 }
 
+.btn-link {
+  background: none !important;
+  color: #620bf0 !important;
+  border: 0 !important;
+  text-decoration: underline !important;
+}
+
 .btn {
   font-size: 13px;
   font-weight: 500 !important;
@@ -308,6 +315,11 @@ table tbody tr td .badge-info {
 table tbody tr td .badge-primary {
   background: #221ecd;
   border-color: #221ecd;
+}
+
+table tbody tr td .badge-primary2 {
+  background: #620bf0;
+  border-color: #620bf0;
 }
 
 table tbody tr td .badge-danger {

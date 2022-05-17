@@ -82,6 +82,13 @@ button:disabled {
   pointer-events: all !important;
 }
 
+.btn-link {
+  background: none !important;
+  color: $primary2Color !important;
+  border: 0 !important;
+  text-decoration: underline !important;
+}
+
 .btn {
   font-size: 13px;
   font-weight: 500 !important;
@@ -337,6 +344,11 @@ table {
         .badge-primary {
           background: $primaryColor;
           border-color: $primaryColor;
+        }
+
+        .badge-primary2 {
+          background: $primary2Color;
+          border-color: $primary2Color;
         }
 
         .badge-danger {

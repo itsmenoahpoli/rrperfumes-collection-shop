@@ -122,7 +122,7 @@
               <td>${row.customer_contacts}</td>
               <td>${row.delivery_notes}</td>
               <td>₱ ${Number(row.total_amount).toFixed(2)}</td>
-              <td><span class="badge badge-warning">${row.status}</span></td>
+              <td><span class="badge badge-${toggleStatusBannerColor(row.status)}">${row.status}</span></td>
               <td>${formatDate(row.created_at)}</td>
               <td>${formatDate(row.updated_at)}</td>
               <td>
@@ -148,6 +148,37 @@
 
   const handleRowView = (reference_code) => {
     redirectTo(`/orders/view.php/?reference_code=${reference_code}`)
+  }
+
+  const toggleStatusBannerColor = status => {
+    switch (status) {
+      case 'PENDING':
+        return 'warning';
+
+      case 'PREPARE':
+        return 'primary';
+
+      case 'PACK FOR PICK-UP/DELIVERY':
+        return 'primary2';
+
+      case 'MONITORING (PICKED UP)':
+        return 'info';
+
+      case "MONITORING (EN'ROUTE TO DELIVERY)":
+        return 'info';
+
+      case "SHIPPED":
+        return 'success';
+
+      case 'CANCELLED':
+        return 'danger';
+
+      case 'FOR RETURNS':
+        return 'danger';
+
+      default:
+        return 'primary'
+    }
   }
 
   (async () => {

@@ -122,7 +122,7 @@
               <td>${row.category}</td>
               <td>₱ ${Number(price).toFixed(2)}</td>
               <td>${formatDate(row.created_at)}</td>
-              <td><span class="badge badge-warning">Sold</span></td>
+              <td><span class="badge badge-success">Created</span></td>
             </tr>
           `;
 

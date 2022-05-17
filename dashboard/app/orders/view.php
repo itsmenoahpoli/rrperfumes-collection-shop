@@ -66,6 +66,18 @@
 
               <div class="detail-content">
                 <div class="form-group">
+                  <button class="btn">
+                    Send payment confirmation via e-mail
+                  </button>
+                </div>
+
+                <div class="form-group d-none">
+                  <button class="btn-link">
+                    Print Invoice
+                  </button>
+                </div>
+
+                <div class="form-group">
                   <small>Order Status</small>
                   <!-- <p id="orderStatus"></p> -->
                   <select name="orderStatus" id="orderStatus" onchange="handleUpdateOrder(this.value)">
@@ -75,6 +87,7 @@
                     <option value="PACK FOR PICK-UP/DELIVERY">PACK FOR PICK-UP/DELIVERY</option>
                     <option value="MONITORING (PICKED UP)">MONITORING (PICKED UP)</option>
                     <option value="MONITORING (EN'ROUTE TO DELIVERY)">MONITORING (EN'ROUTE TO DELIVERY)</option>
+                    <option value="SHIPPED">SHIPPED</option>
                     <option value="CANCELLED">CANCELLED</option>
                     <option value="FOR RETURNS">FOR RETURNS</option>
                   </select>
@@ -186,7 +199,6 @@
   requiresAuthCheck()
 
   const reference_code = new URLSearchParams(window.location.search).get('reference_code')
-  console.log(reference_code)
 
   const getData = async () => {
     await httpRequest(

@@ -116,7 +116,7 @@
                 <input type="checkbox">
               </td>
               <td class="img-td">
-                <img src="./../../assets/images/perfume-img.jpg" alt="perfume-img">
+                <img src="./../../assets/images/perfume-img.jpg" alt="perfume-img" loading="lazy">
                 <span>
                   ${row.sku || '-'}
                 </span>
